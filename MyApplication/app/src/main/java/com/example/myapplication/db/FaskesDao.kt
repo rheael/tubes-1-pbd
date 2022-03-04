@@ -15,4 +15,7 @@ interface FaskesDao {
 
     @Delete
     fun delete(faskes: Faskes)
+
+    @Query("DELETE FROM faskes where nama= :faskesNama")
+    fun deleteNama(faskesNama: String)
 }

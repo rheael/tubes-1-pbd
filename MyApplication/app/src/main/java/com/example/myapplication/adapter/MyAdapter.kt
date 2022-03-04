@@ -1,5 +1,8 @@
 package com.example.myapplication.adapter
 
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.FaskesActivity
 import com.example.myapplication.R
+import com.example.myapplication.WebViewActivity
 import com.example.myapplication.model.Post
 import com.example.myapplication.model.Results
 
@@ -27,6 +32,14 @@ class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.title.text = myList[position].title;
+        holder.title.setOnClickListener() {
+            val context = holder.title.getContext();
+            val intent = Intent(context, WebViewActivity::class.java)
+            val extras = Bundle();
+            extras.putString("url", myList[position].link[0])
+            intent.putExtras(extras);
+            context.startActivity(intent);
+        }
 //        val success: String,
 //        val message: String,
 //        val count_total: Int,

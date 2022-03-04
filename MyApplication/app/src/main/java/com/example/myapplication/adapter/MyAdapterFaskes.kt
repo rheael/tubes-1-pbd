@@ -48,6 +48,8 @@ class MyAdapterFaskes: RecyclerView.Adapter<MyAdapterFaskes.MyViewHolder>(){
             extras.putString("telp", myList[position].telp)
             extras.putString("jenis_faskes", myList[position].jenis_faskes)
             extras.putString("status", myList[position].status)
+            extras.putString("latitude", myList[position].latitude)
+            extras.putString("longitude", myList[position].longitude)
             intent.putExtras(extras);
             context.startActivity(intent);
         }

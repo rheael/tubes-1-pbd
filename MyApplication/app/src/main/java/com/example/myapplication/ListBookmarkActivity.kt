@@ -22,7 +22,7 @@ class ListBookmarkActivity : AppCompatActivity() {
         faskesBookmark = findViewById(R.id.faskes_bookmark)
         GlobalScope.launch {
             //memanggil function di dalam coroutine
-            // db.clearAllTables()
+            //db.clearAllTables()
             showFaskes()
         }
         // val namaTV textView = findViewById(R.id.nama_faskes);
