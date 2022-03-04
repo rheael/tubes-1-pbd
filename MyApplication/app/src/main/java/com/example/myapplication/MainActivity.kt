@@ -56,6 +56,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent);
     }
 
+    fun goToBookmark(view: View?) {
+        val intent = Intent(this, ListBookmarkActivity::class.java);
+        startActivity(intent);
+    }
+
     /*
     lateinit var db: BookDatabase
     lateinit var tvDisplay: TextView
