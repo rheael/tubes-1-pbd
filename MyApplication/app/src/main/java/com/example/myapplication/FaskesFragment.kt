@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,19 +22,11 @@ class FaskesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
     ): View? {
+        //val title_faskes: Button = requireView().findViewById(R.id.title_faskes)
+        //title_faskes.setOnClickListener{}
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //super.onViewCreated(view, savedInstanceState)
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerview_fragment)
-        setupRecyclerView(recyclerView)
-    }
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = myAdapter;
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-    }
-    fun getRecyclerView(): RecyclerView {
-        val recyclerView: RecyclerView = requireView().findViewById(R.id.recyclerview_fragment)
-        return(recyclerView);
+        super.onViewCreated(view, savedInstanceState)
     }
 }

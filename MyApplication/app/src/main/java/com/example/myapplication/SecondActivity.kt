@@ -8,6 +8,7 @@ class MainActivity : AppCompatActivity() {
     }
 }*/
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -103,44 +104,24 @@ class SecondActivity : AppCompatActivity() {
                         viewModel.myFaskesResults.observe(this@SecondActivity, Observer {
                                 response ->
                             myAdapterFaskes.setData(response.data);
+
                             for(i in 0 until response.data.count()) {
                                 Log.d("Response", response.data[i].nama);
+                                /*  title_faskes.setOnClickListener {
+                                    val intent = Intent(applicationContext, FaskesActivity::class.java)
+                                    intent.putExtra("nama", response.data[i].nama)
+                                    intent.putExtra("kode", response.data[i].kode)
+                                    intent.putExtra("alamat", response.data[i].alamat)
+                                    intent.putExtra("telp", response.data[i].telp)
+                                    intent.putExtra("jenis_faskes", response.data[i].jenis_faskes)
+                                    intent.putExtra("status", response.data[i].status)
+                                    applicationContext.startActivity(intent)
+                                } */
                             }
                         })
                     }
                 }
-//spinner2.setSelected(false);
-//spinner2.setSelection(0,true);
-                /*
-spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-    override fun onNothingSelected(parent: AdapterView<*>?) {
 
-    }
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        var citySelected = "KOTA BANDUNG" // default value
-        var init = 0;
-        //Log.d("Response", citySelected);
-        if (init!=0) {
-            citySelected = (spinner2.selectedItem.toString()).uppercase();
-            //viewModel.getFaskes(provinceSelected.uppercase(), citySelected.uppercase());
-            //viewModel.getFaskes("JAWA BARAT", "KOTA BANDUNG");
-            //viewModel.getFaskes(provinceSelected, citySelected);
-            /*viewModel.myFaskesResults.observe(
-                this@SecondActivity,
-                Observer { response ->
-                    for (i in 0 until response.data.count()) {
-                        Log.d("Response", response.data[i].nama)
-                        //city[i] = response.results[i].key;
-                    }
-                })
-            Log.d("Response", provinceSelected);
-            Log.d("Response", citySelected);*/
-        }
-        else {
-            init += 1;
-        }
-    }
-}*/
             }
         }
     }
