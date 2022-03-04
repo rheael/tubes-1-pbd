@@ -32,7 +32,7 @@ class SecondActivity : AppCompatActivity() {
         viewModel.getProvince();
         //viewModel.getCity("Gorontalo");
         viewModel.myProvinceResults.observe(this, Observer {
-            response ->
+                response ->
             for(i in 0 until response.results.count()) {
                 Log.d("Response", response.results[i].key)
                 province[i] = (response.results[i].key);
@@ -40,49 +40,77 @@ class SecondActivity : AppCompatActivity() {
         })
         val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, province)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner.setSelected(false);
+        spinner.setSelection(0,false);
         spinner.adapter = aa;
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val provinceSelected = spinner.selectedItem.toString();
+                var provinceSelected = "JAWA BARAT"; // default value
+                if (spinner.selectedItem!=null) {
+                    provinceSelected = (spinner.selectedItem.toString()).uppercase();
+                }
                 Log.d("Province",provinceSelected);
-                //Toast.makeText(this@SecondActivity, provinceSelected, Toast.LENGTH_LONG).show();
                 val spinner2: Spinner = findViewById(R.id.spinner2);
-                //viewModel.getCity(provinceSelected);
-                /*val city = Array<String>(30) {""};
+                viewModel.getCity(provinceSelected);
+                val city = Array<String>(30) {""};
                 viewModel.myCityResults.observe(this@SecondActivity, Observer {
-                    response ->
+                        response ->
                     for(i in 0 until response.results.count()) {
                         Log.d("Response", response.results[i].key)
                         city[i] = response.results[i].key;
                     }
                 })
+
                 val aa2 = ArrayAdapter(this@SecondActivity, android.R.layout.simple_spinner_item, city)
                 aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner2.setAdapter(aa2);
-                aa2.notifyDataSetChanged();*/
-            }
+                spinner2.setSelection(0,false);
+                aa2.notifyDataSetChanged();
+                spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        
+                    }
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
+                    }
+                }
+//spinner2.setSelected(false);
+//spinner2.setSelection(0,true);
+                /*
+spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        var citySelected = "KOTA BANDUNG" // default value
+        var init = 0;
+        //Log.d("Response", citySelected);
+        if (init!=0) {
+            citySelected = (spinner2.selectedItem.toString()).uppercase();
+            //viewModel.getFaskes(provinceSelected.uppercase(), citySelected.uppercase());
+            //viewModel.getFaskes("JAWA BARAT", "KOTA BANDUNG");
+            //viewModel.getFaskes(provinceSelected, citySelected);
+            /*viewModel.myFaskesResults.observe(
+                this@SecondActivity,
+                Observer { response ->
+                    for (i in 0 until response.data.count()) {
+                        Log.d("Response", response.data[i].nama)
+                        //city[i] = response.results[i].key;
+                    }
+                })
+            Log.d("Response", provinceSelected);
+            Log.d("Response", citySelected);*/
         }
-        // Coba yang kota
-        /* val spinner2: Spinner = findViewById(R.id.spinner2)
-        val provinceSelected = spinner.selectedItem.toString();
-        viewModel.getCity(provinceSelected);
-        val city = mutableListOf<String>();
-        viewModel.myCityResults.observe(this, Observer {
-                response ->
-            for(i in 0 until response.results.count()) {
-                Log.d("Response", response.results[i].key)
-                city.add(response.results[i].key);
+        else {
+            init += 1;
+        }
+    }
+}*/
             }
-        })
-        val aa2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, city)
-        aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(aa2);
-        aa.notifyDataSetChanged(); */
+        }
     }
 }
