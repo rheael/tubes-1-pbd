@@ -40,9 +40,9 @@ class SecondActivity : AppCompatActivity() {
         })
         val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, province)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spinner.setSelected(false);
-        spinner.setSelection(0,false);
         spinner.adapter = aa;
+        spinner.setSelected(false);
+        spinner.setSelection(0,true);
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -68,14 +68,26 @@ class SecondActivity : AppCompatActivity() {
                 val aa2 = ArrayAdapter(this@SecondActivity, android.R.layout.simple_spinner_item, city)
                 aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner2.setAdapter(aa2);
-                spinner2.setSelection(0,false);
+                spinner2.setSelected(false);
+                spinner2.setSelection(0,true);
                 aa2.notifyDataSetChanged();
                 spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {
-                        
+
                     }
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+                        var citySelected = "KOTA BANDUNG";
+                        if (spinner2.selectedItem!=null) {
+                            citySelected = (spinner2.selectedItem.toString()).uppercase();
+                        }
+                        Log.d("Province",citySelected);
+                        viewModel.getFaskes(provinceSelected, citySelected);
+                        viewModel.myFaskesResults.observe(this@SecondActivity, Observer {
+                                response ->
+                            for(i in 0 until response.data.count()) {
+                                Log.d("Response", response.data[i].nama)
+                            }
+                        })
                     }
                 }
 //spinner2.setSelected(false);
