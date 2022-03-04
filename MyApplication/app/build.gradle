@@ -73,6 +73,9 @@ dependencies {
 
     // viewModelScope
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    
+    // Fragment
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
 }
 
 repositories {

@@ -12,8 +12,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.adapter.MyAdapter
+import com.example.myapplication.adapter.MyAdapterFaskes
 import com.example.myapplication.repository.Repository
 import org.chromium.base.Log
 import java.util.*
@@ -21,6 +29,7 @@ import kotlin.collections.*
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var viewModel: SecondViewModel;
+    private val myAdapterFaskes by lazy { MyAdapterFaskes() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
@@ -81,11 +90,21 @@ class SecondActivity : AppCompatActivity() {
                             citySelected = (spinner2.selectedItem.toString()).uppercase();
                         }
                         Log.d("Province",citySelected);
+                        supportFragmentManager.commit {
+                            setReorderingAllowed(true)
+                            add<FaskesFragment>(R.id.fragmentFaskes)
+                        }
+                        // val fr = getSupportFragmentManager().findFragmentById(R.id.fragmentFaskes);
+                        // val frRecyclerView = fr.getRecyclerView();
+                        val recyclerView: RecyclerView = findViewById(R.id.recyclerview_fragment);
+                        setupRecyclerView(recyclerView);
                         viewModel.getFaskes(provinceSelected, citySelected);
+
                         viewModel.myFaskesResults.observe(this@SecondActivity, Observer {
                                 response ->
+                            myAdapterFaskes.setData(response.data);
                             for(i in 0 until response.data.count()) {
-                                Log.d("Response", response.data[i].nama)
+                                Log.d("Response", response.data[i].nama);
                             }
                         })
                     }
@@ -124,5 +143,9 @@ spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 }*/
             }
         }
+    }
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
+        recyclerView.adapter = myAdapterFaskes
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
