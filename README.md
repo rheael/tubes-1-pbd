@@ -27,4 +27,4 @@ Retrofit: REST Client
 # Anggota - Bagian yang Dikerjakan
 13519047 Rhea Elka Pandumpi - News, WebView, Cari Faskes, Detail Faskes, Map Faskes, Bookmark/Unbookmark, List Bookmark  
 13517136 Lucky Jonathan Chandra -  
-13518021 Zaidan Naufal Sudrajat -  
+13518021 Zaidan Naufal Sudrajat -  Tampilan News, menu item
