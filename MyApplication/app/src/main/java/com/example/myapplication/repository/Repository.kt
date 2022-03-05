@@ -16,4 +16,8 @@ class Repository {
     suspend fun getCity(start_id: String): CityResults {
         return RetrofitInstance.api.getCity(start_id)
     }
+
+    suspend fun postScan(checkInBody: QrCode): ScanResults {
+        return RetrofitInstance.api.postScan(checkInBody)
+    }
 }

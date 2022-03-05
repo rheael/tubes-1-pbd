@@ -18,4 +18,8 @@ interface SimpleApi {
 
     @GET("get-city")
     suspend fun getCity(@Query("start_id") province:String): CityResults;
+
+    @Headers("Content-Type: application/json")
+    @POST("check-in/")
+    suspend fun postScan(@Body checkInBody: QrCode): ScanResults;
 }
