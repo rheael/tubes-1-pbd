@@ -6,37 +6,36 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.model.Post
 
-class AdapterNews(private val dataSet: Array<String>) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class AdapterNews: RecyclerView.Adapter<AdapterNews.MyViewHolder>(){
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
+    private var myList = emptyList<Post>()
 
-        init {
-            // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.textView)
-        }
+    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    {
+        var title: TextView = itemView.findViewById(R.id.title)
+        var description: TextView = itemView.findViewById(R.id.description)
     }
 
-    // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.text_row_item, viewGroup, false)
-
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterNews.MyViewHolder {
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false))
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.title.text = myList[position].title;
+//        val success: String,
+//        val message: String,
+//        val count_total: Int,
+//        val results: List<Post>
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount(): Int {
+        return myList.size
+    }
 
+    fun setData(newList: List<Post>) {
+        myList = newList;
+        notifyDataSetChanged();
+    }
 }
